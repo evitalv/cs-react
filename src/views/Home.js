@@ -5,6 +5,7 @@ function Home() {
   return (
     <section>
       <Link to="/legal-entities">Legal entities</Link>
+      <Link to="/cases">Cases</Link>
     </section>
   );
 }

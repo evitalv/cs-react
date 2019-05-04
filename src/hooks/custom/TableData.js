@@ -6,4 +6,10 @@ function useCustomLegalEntityData() {
   return [columnHeadings, columnData];
 }
 
-export {useCustomLegalEntityData};
+function useCustomCaseData() {
+  const columnHeadings = [];
+  const columnData = [];
+  return [columnHeadings, columnData];
+}
+
+export {useCustomLegalEntityData, useCustomCaseData};
