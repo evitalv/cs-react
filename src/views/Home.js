@@ -1,12 +1,20 @@
 import React from "react";
-import {BrowserRouter, Route, Link, Switch} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 function Home() {
   return (
-    <section>
-      <Link to="/legal-entities">Legal entities</Link>
-      <Link to="/cases">Cases</Link>
-    </section>
+    <React.Fragment>
+      <section id="home-main">
+        <h1>Card Suite Home</h1>
+        <div>
+          <Link to="/legal-entities">Legal entities and something else</Link>
+          <Link to="/cases">Cases</Link>
+          <Link to="/cases">Something</Link>
+          <Link to="/cases">Something</Link>
+          <Link to="/cases">Something</Link>
+        </div>
+      </section>
+      </React.Fragment>
   );
 }
 
