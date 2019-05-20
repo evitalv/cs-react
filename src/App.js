@@ -13,7 +13,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/legal-entities" component={LegalEntitySearchPage} />
-          <Route exact path="/legal-entities/:leid" component={LegalEntitySearchPage} />
+          <Route exact path="/legal-entities-quick/:leid" component={LegalEntitySearchPage} />
           <Route exact path="/cases" component={CaseSearchPage} />
           <Route exact path="/cases/:caseId" component={CaseSearchPage} />
         </Switch>

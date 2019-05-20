@@ -26,13 +26,13 @@ function LegalEntitySearchPage({match}) {
   }
   if (!columnData.length) {
     columnData = [
-      ["id", ""],
-      ["legalName", ""],
-      ["legalForm", ""],
-      ["country", ""],
-      ["regNo", ""],
-      ["regDate", "d"],
-      ["status", ""]
+      ["id", "", ""],
+      ["legalName", "", ""],
+      ["legalForm", "", ""],
+      ["country", "", ""],
+      ["regNo", "", "r"],
+      ["regDate", "d", ""],
+      ["status", "", ""]
     ];
   }
 
@@ -58,13 +58,15 @@ function LegalEntitySearchPage({match}) {
   return (
     <React.Fragment>
       <SearchCriteriaLE />
-      <TableForSearchResults
-        data={legalEntities}
-        headings={columnHeadings}
-        attributes={columnData}
-        detailsLink="/legal-entities"
-      />
-      <LegalEntityQuickDetails leid={match.params.leid} />
+      <div class="table-quick">
+        <TableForSearchResults
+          data={legalEntities}
+          headings={columnHeadings}
+          attributes={columnData}
+          detailsLink="/legal-entities-quick"
+        />
+        <LegalEntityQuickDetails leid={match.params.leid} />
+      </div>
     </React.Fragment>
   );
 }

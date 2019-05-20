@@ -26,17 +26,17 @@ function TableForSearchResults(props) {
   const tRows = data.map(item => (
     <tr key={item.id}>
       {props.attributes.map(attr => (
-        <td key={attr[0]}>
-          <Link to={`${props.detailsLink}/${item.id}`}>
-            {format(item[attr[0]], attr[1])}
-          </Link>
-        </td>
+          <td key={attr[0]} {...(attr[2] == "r" ? {className: 'right'} : {})}>
+            <Link to={`${props.detailsLink}/${item.id}`}>
+              {format(item[attr[0]], attr[1])}
+            </Link>
+          </td>
       ))}
     </tr>
   ));
 
   return (
-    <table>
+    <table className="search-res">
       <thead>{tHeadings}</thead>
       <tbody>{tRows}</tbody>
     </table>
