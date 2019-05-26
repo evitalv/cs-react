@@ -148,3 +148,6 @@ section.quick-details nav {
   flex: 0 1 auto;
   min-width: 10em;
 }
+.hidden {
+  display: none;
+}

@@ -2,7 +2,6 @@ import React from "react";
 import {Link} from "react-router-dom";
 
 function TableForSearchResults(props) {
-  const data = props.data;
 
   function format(value, type) {
     if (type === "" || value == null) {
@@ -23,7 +22,7 @@ function TableForSearchResults(props) {
     </tr>
   );
 
-  const tRows = data.map(item => (
+  const tRows = props.data.map(item => (
     <tr key={item.id}>
       {props.attributes.map(attr => (
           <td key={attr[0]} {...(attr[2] == "r" ? {className: 'right'} : {})}>

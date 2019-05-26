@@ -58,7 +58,7 @@ function LegalEntitySearchPage({match}) {
   return (
     <React.Fragment>
       <SearchCriteriaLE />
-      <div class="table-quick">
+      <div className="table-quick">
         <TableForSearchResults
           data={legalEntities}
           headings={columnHeadings}
