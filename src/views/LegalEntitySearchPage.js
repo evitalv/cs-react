@@ -5,14 +5,14 @@ import LegalEntityQuickDetails from "../components/legal-entities/LegalEntityQui
 import SearchCriteriaLE from "../components/legal-entities/SearchCriteriaLE";
 import {BrowserRouter, Route, Link, Switch} from "react-router-dom";
 // import useTableCurrentRow from "../hooks/useTableCurrentRow";
-import {useCustomLegalEntityData} from "../hooks/custom/TableData";
+import {useCustomLegalEntityDataTable} from "../hooks/custom/TableData";
 
 function LegalEntitySearchPage({match}) {
   const [currentRowId, setCurrentRowId] = useState(null);
   // const legalEntities1 = createLegalEntities(5);
   const [legalEntities, setLegalEntities] = useState([]);
 
-  let [columnHeadings, columnData] = useCustomLegalEntityData();
+  let [columnHeadings, columnData] = useCustomLegalEntityDataTable();
   if (!columnHeadings.length) {
     columnHeadings = [
       "Internal ID",

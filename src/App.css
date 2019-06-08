@@ -129,7 +129,6 @@ table.search-res {
 section.quick-details {
   /* display: inline-block; */
   /* width: 30%; */
-  border: solid 1px black;
   flex: 1 1 auto;
   margin: 1em;
 }
@@ -137,16 +136,28 @@ section.quick-details {
   display: flex;
 
 }
-nav ul {
-  list-style: none;
-  padding: 0px;
-}
 div.tab-content {
   flex: 1 1 auto;
 }
 section.quick-details nav {
   flex: 0 1 auto;
   min-width: 10em;
+}
+section.quick-details nav ul {
+  list-style: none;
+  padding: 0px;
+}
+section.quick-details nav li {
+  display: block;
+  margin: .2em;
+  padding: .6em;
+  cursor: pointer;
+  /* border: 1em solid; */
+  border-image: linear-gradient(to bottom right, #f9f9f9 70%, var(--home-color-80));
+  border-image-slice: 1;
+}
+section.quick-details nav li.active {
+  background-color: var(--tuesday-color);
 }
 .hidden {
   display: none;

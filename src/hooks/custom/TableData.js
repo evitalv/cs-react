@@ -1,15 +1,15 @@
 import React from "react";
 
-function useCustomLegalEntityData() {
+function useCustomLegalEntityDataTable() {
   const columnHeadings = [];
   const columnData = [];
   return [columnHeadings, columnData];
 }
 
-function useCustomCaseData() {
+function useCustomCaseDataTable() {
   const columnHeadings = [];
   const columnData = [];
   return [columnHeadings, columnData];
 }
 
-export {useCustomLegalEntityData, useCustomCaseData};
+export {useCustomLegalEntityDataTable, useCustomCaseDataTable};

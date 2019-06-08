@@ -3,12 +3,12 @@ import Axios from "axios";
 import TableForSearchResults from "../components/general/TableForSearchResults";
 import CaseQuickDetails from "../components/cases/CaseQuickDetails";
 import SearchCriteriaCase from "../components/cases/SearchCriteriaCase";
-import {useCustomCaseData} from "../hooks/custom/TableData";
+import {useCustomCaseDataTable} from "../hooks/custom/TableData";
 
 function CaseSearchPage({match}) {
   const [cases, setCases] = useState([]);
 
-  let [columnHeadings, columnData] = useCustomCaseData();
+  let [columnHeadings, columnData] = useCustomCaseDataTable();
   if (!columnHeadings.length) {
     columnHeadings = ["Internal ID", "Status"];
   }

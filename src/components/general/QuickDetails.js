@@ -1,16 +1,12 @@
 import React, {useState} from "react";
 
 function QuickDetails(props) {
-  const [activeTab, setActiveTab] = useState(0);
 
-  function handleClick(index, url) {
-    setActiveTab(index);
-    props.callback(index, url);
-  }
   const tabNames = (
     <ul>
       {props.data.map((item, index) => (
-        <li key={item.tabName} onClick={() => handleClick(index, item.source)}>
+        <li key={item.tabName} onClick={() => props.callback(index, item.source)}
+          className={`${props.activeTab == index ? "active" : ""}`}>
           {item.tabName}
         </li>
       ))}
