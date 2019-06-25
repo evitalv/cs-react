@@ -19,6 +19,7 @@ function TableForSearchResults(props) {
       {props.headings.map(item => (
         <th key={item}>{item}</th>
       ))}
+      <th>Update</th>
     </tr>
   );
 
@@ -31,6 +32,7 @@ function TableForSearchResults(props) {
             </Link>
           </td>
       ))}
+      <td><button onClick={() => props.update(item.id)}>Update</button></td>
     </tr>
   ));
 

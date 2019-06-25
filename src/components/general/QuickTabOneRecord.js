@@ -11,12 +11,6 @@ function QuickTabOneRecord(props) {
     </React.Fragment>
   ));
 
-  return (
-    <dl>
-      <dt>Legal name</dt>
-      <dd>{props.data.legalName}</dd>
-      {dList}
-    </dl>
-  );
+  return <dl>{dList}</dl>;
 }
 export default QuickTabOneRecord;

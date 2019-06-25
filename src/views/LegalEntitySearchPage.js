@@ -3,14 +3,16 @@ import Axios from "axios";
 import TableForSearchResults from "../components/general/TableForSearchResults";
 import LegalEntityQuickDetails from "../components/legal-entities/LegalEntityQuickDetails";
 import SearchCriteriaLE from "../components/legal-entities/SearchCriteriaLE";
+import UpdateLE from "../components/legal-entities/UpdateLE";
 import {BrowserRouter, Route, Link, Switch} from "react-router-dom";
 // import useTableCurrentRow from "../hooks/useTableCurrentRow";
 import {useCustomLegalEntityDataTable} from "../hooks/custom/TableData";
 
 function LegalEntitySearchPage({match}) {
-  const [currentRowId, setCurrentRowId] = useState(null);
-  // const legalEntities1 = createLegalEntities(5);
   const [legalEntities, setLegalEntities] = useState([]);
+  const [currentRowId, setCurrentRowId] = useState(null);
+  const [update, setUpdate] = useState(false);
+  const [idForUpdate, setIdForUpdate] = useState(null);
 
   let [columnHeadings, columnData] = useCustomLegalEntityDataTable();
   if (!columnHeadings.length) {
@@ -35,7 +37,15 @@ function LegalEntitySearchPage({match}) {
       ["status", "", ""]
     ];
   }
+  const nameField = "legalName";
 
+  const showUpdate = (id) => {
+    setUpdate(true);
+    setIdForUpdate(id);
+  };
+  const hideUpdate = () => {
+    setUpdate(false);
+  };
   // const [handleRowClick, handleRowKeyDown] = useTableCurrentRow(
   //   setCurrentRowId
   // );
@@ -58,30 +68,19 @@ function LegalEntitySearchPage({match}) {
   return (
     <React.Fragment>
       <SearchCriteriaLE />
+      <UpdateLE leid={idForUpdate} isShowing={update} hide={hideUpdate} nameField={nameField} />
       <div className="table-quick">
         <TableForSearchResults
           data={legalEntities}
           headings={columnHeadings}
           attributes={columnData}
           detailsLink="/legal-entities-quick"
+          update={showUpdate} nameField={nameField}
         />
         <LegalEntityQuickDetails leid={match.params.leid} />
       </div>
     </React.Fragment>
   );
-}
-
-// Factory function
-function createLegalEntity(id, legalName, bank, contractNo) {
-  return {id, legalName, bank, contractNo};
-}
-
-function createLegalEntities(n) {
-  const result = [];
-  for (let i = 0; i < n; i++) {
-    result.push(createLegalEntity(i, `name${i}`, "OTP", `contractNo${i}`));
-  }
-  return result;
 }
 
 export default LegalEntitySearchPage;

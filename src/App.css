@@ -8,7 +8,32 @@
   --tuesday-color: hsla(85, 59%, 58%, 1);
   --grey-color: hsla(280, 5%, 80%);
 }
-h1 {
+
+/***
+======= Global
+*/
+
+a {
+  text-decoration: none;
+}
+dd {
+  margin: 0px;
+}
+.right {
+  text-align: right;
+}
+.hidden {
+  display: none;
+}
+.error {
+  color:red;
+}
+
+/***
+======= Home page
+*/
+
+#home-main h1 {
   text-align: center;
   margin: 1.6em auto 0 auto;
   padding: .8em;
@@ -18,38 +43,6 @@ h1 {
   text-transform: uppercase;
   /* border-bottom: 4px hsla(204, 100%, 60%, 1) solid; */
   box-shadow: 0 .1em .3em var(--home-color-60);
-}
-a {
-  text-decoration: none;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 #home-main {
   background-color: #fff;
@@ -81,15 +74,34 @@ a {
   background-image: linear-gradient(to bottom right, #f9f9f9 70%, var(--home-color-80));
   border-radius: .7em;
 }
-.right {
-  text-align: right;
-}
+
+/***
+======= Layout
+*/
+
 div.table-quick {
   width: 100%;
   /* justify-content: space-around; */
   font-size: .85em;
   display: flex;
 }
+section.quick-details {
+  /* display: inline-block; */
+  /* width: 30%; */
+  flex: 1 1 auto;
+  margin: 1em;
+}
+.quick-details > div {
+  display: flex;
+}
+div.tab-content {
+  flex: 1 1 auto;
+}
+
+/***
+======= Search results table
+*/
+
 thead {
   background-image: linear-gradient(var(--monday-color), var(--monday2-color));
 }
@@ -126,19 +138,11 @@ table.search-res {
   /* width: 70%; */
   margin: 1em;
 }
-section.quick-details {
-  /* display: inline-block; */
-  /* width: 30%; */
-  flex: 1 1 auto;
-  margin: 1em;
-}
-.quick-details > div {
-  display: flex;
 
-}
-div.tab-content {
-  flex: 1 1 auto;
-}
+/***
+======= Tabs in Quick Details
+*/
+
 section.quick-details nav {
   flex: 0 1 auto;
   min-width: 10em;
@@ -159,6 +163,55 @@ section.quick-details nav li {
 section.quick-details nav li.active {
   background-color: var(--tuesday-color);
 }
-.hidden {
-  display: none;
+
+/***
+======= Data in Quick Details
+*/
+
+section.quick-details dl {
+  padding: 1em;
+}
+section.quick-details dt {
+  color: #888;
+  font-size: .9em;
+  border-left: 3px solid #666;
+  padding: .5em;
+  box-shadow: -3px 0px 1px 0px #666;
+}
+section.quick-details dd {
+  padding-bottom: .8em;
+  padding-top: .4em;
+  margin-left: 2em;
+}
+
+/***
+======= Modal
+*/
+
+div.modal-whole {
+  position: fixed;
+  z-index: 20;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,.4);
+}
+div.modal-content {
+  background-color: #f4f4f4;
+  margin: 3em auto;
+  padding: 1.5em 3em;
+  width: 50%;
+  min-width: 500px;
+  box-shadow: 0 5px 8px 0 rgba(0,0,0,.3), 0 6px 20px 0 rgba(0,0,0,.25);
+}
+div.modal-content span.close {
+  color: #999;
+  font-size: 1.5em;
+  float: right;
+}
+div.modal-content span.close:hover {
+  color: #000;
+  cursor: pointer;
 }
