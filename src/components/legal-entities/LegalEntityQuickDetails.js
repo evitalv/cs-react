@@ -81,11 +81,11 @@ function LegalEntityQuickDetails(props) {
     }
   }, [props.leid]);
 
-  return (
-    <QuickDetails name="Alfa" data={allFixedData} callback={loadData} activeTab={state.activeTab}>
+  return props.leid ? (
+    <QuickDetails name={state.tabData[props.nameField]} data={allFixedData} callback={loadData} activeTab={state.activeTab}>
       <ContentsOfOneQuickTab data={state.tabData} tab={state.activeTab} fixedData={allFixedData}/>
     </QuickDetails>
-  );
+  ) : null;
 }
 
 export default LegalEntityQuickDetails;

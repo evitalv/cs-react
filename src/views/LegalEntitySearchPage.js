@@ -13,6 +13,7 @@ function LegalEntitySearchPage({match}) {
   const [currentRowId, setCurrentRowId] = useState(null);
   const [update, setUpdate] = useState(false);
   const [idForUpdate, setIdForUpdate] = useState(null);
+  const [counterForRefresh, setRefresh] = useState(0);
 
   let [columnHeadings, columnData] = useCustomLegalEntityDataTable();
   if (!columnHeadings.length) {
@@ -45,7 +46,11 @@ function LegalEntitySearchPage({match}) {
   };
   const hideUpdate = () => {
     setUpdate(false);
+    setIdForUpdate(-1);
   };
+  function refresh() {
+    setRefresh(counterForRefresh+1);
+  }
   // const [handleRowClick, handleRowKeyDown] = useTableCurrentRow(
   //   setCurrentRowId
   // );
@@ -54,7 +59,7 @@ function LegalEntitySearchPage({match}) {
     Axios.get("http://localhost:8080/legal-entities").then(res => {
       setLegalEntities(res.data);
     });
-  }, []);
+  }, [counterForRefresh]);
 
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -68,16 +73,16 @@ function LegalEntitySearchPage({match}) {
   return (
     <React.Fragment>
       <SearchCriteriaLE />
-      <UpdateLE leid={idForUpdate} isShowing={update} hide={hideUpdate} nameField={nameField} />
+      <UpdateLE leid={idForUpdate} isShowing={update} hide={hideUpdate} nameField={nameField} refresh={refresh} />
       <div className="table-quick">
         <TableForSearchResults
           data={legalEntities}
           headings={columnHeadings}
           attributes={columnData}
           detailsLink="/legal-entities-quick"
-          update={showUpdate} nameField={nameField}
+          update={showUpdate}
         />
-        <LegalEntityQuickDetails leid={match.params.leid} />
+        <LegalEntityQuickDetails leid={match.params.leid} nameField={nameField} />
       </div>
     </React.Fragment>
   );

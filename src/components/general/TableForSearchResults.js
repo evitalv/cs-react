@@ -32,7 +32,7 @@ function TableForSearchResults(props) {
             </Link>
           </td>
       ))}
-      <td><button onClick={() => props.update(item.id)}>Update</button></td>
+      <td><button class="update" onClick={() => props.update(item.id)}>Update</button></td>
     </tr>
   ));
 

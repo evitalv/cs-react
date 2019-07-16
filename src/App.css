@@ -7,6 +7,24 @@
   --monday2-color: hsla(19, 95%, 80%, 1);
   --tuesday-color: hsla(85, 59%, 58%, 1);
   --grey-color: hsla(280, 5%, 80%);
+  --c1: hsl(252, 95%, 50%);
+  --c2: hsl(252, 95%, 75%);
+  --c3: hsl(72, 70%, 50%);
+  --c4: hsl(72, 95%, 30%);
+  --c5: hsl(72, 95%, 70%);
+  --c6: hsl(72, 70%, 75%);
+  --c7: hsl(252, 60%, 30%);
+  --c8: hsl(72, 95%, 20%);
+  --c11: hsl(224, 60%, 22%);
+  --c12: hsl(224, 65%, 12%);
+  --c13: hsl(224, 80%, 98%);
+  --c21: hsl(202, 80%, 84%);
+  --c22: hsl(202, 80%, 72%);
+  --c23: hsl(202, 80%, 90%);
+  --c31: hsl(72, 80%, 74%);
+  --c32: hsl(72, 80%, 65%);
+  --c41: hsl(99, 86%, 57%);
+  --c42: hsl(99, 86%, 47%);
 }
 
 /***
@@ -18,6 +36,10 @@ a {
 }
 dd {
   margin: 0px;
+}
+ul {
+  list-style: none;
+  padding: 0px;
 }
 .right {
   text-align: right;
@@ -39,15 +61,16 @@ dd {
   padding: .8em;
   font-size: 200%;
   font-weight: normal;
-  color: #555;
+  color: var(--c11);
+  /* background-color: var(--c2); */
   text-transform: uppercase;
   /* border-bottom: 4px hsla(204, 100%, 60%, 1) solid; */
-  box-shadow: 0 .1em .3em var(--home-color-60);
+  /* box-shadow: 0 .1em .3em var(--home-color-60); */
 }
 #home-main {
   background-color: #fff;
   margin: 0 auto;
-  width: 50%;
+  width: 60%;
   min-width: 400px;
 }
 #home-main div {
@@ -62,17 +85,21 @@ dd {
 }
 #home-main a {
   margin: 1em;
-  border: 2px solid var(--home-color-80);
   padding: 1em;
   /* display: inline-block; */
   /* width: 12em; */
   height: 5em;
   flex: 0 1 12em;
   /* vertical-align: middle; */
-  color: #000;
-  /* background-color: #f9f9f9; */
-  background-image: linear-gradient(to bottom right, #f9f9f9 70%, var(--home-color-80));
-  border-radius: .7em;
+  font-size: 1.2em;
+  color: var(--c11);
+  /* background-color: var(--c4); */
+  /* background-image: linear-gradient(to bottom right, #f9f9f9 70%, var(--home-color-80)); */
+  border-radius: .3em;
+  box-shadow: 0 .2em .4em rgba(0,0,0,0.3);
+}
+#home-main a:hover {
+  background-color: var(--c13);
 }
 
 /***
@@ -103,19 +130,20 @@ div.tab-content {
 */
 
 thead {
-  background-image: linear-gradient(var(--monday-color), var(--monday2-color));
+  background-image: linear-gradient(var(--c12), var(--c11));
+  color: #f7f7f7;
 }
 thead th {
   font-weight: 400;
-  padding: .4em .7em;
+  padding: .6em .7em;
 }
 td a:hover {
   /* background-color: var(--monday-color); */
-  color: var(--monday-color);
+  /* color: var(--monday-color); */
 }
-tr:focus {
-  background-color: blue;
-  color: white;
+tbody tr:hover {
+  background-color: var(--c13);
+  /* color: white; */
 }
 td {
   border-bottom: solid 1px var(--grey-color);
@@ -147,21 +175,23 @@ section.quick-details nav {
   flex: 0 1 auto;
   min-width: 10em;
 }
-section.quick-details nav ul {
-  list-style: none;
-  padding: 0px;
-}
 section.quick-details nav li {
   display: block;
   margin: .2em;
   padding: .6em;
   cursor: pointer;
   /* border: 1em solid; */
-  border-image: linear-gradient(to bottom right, #f9f9f9 70%, var(--home-color-80));
-  border-image-slice: 1;
+  /* border-image: linear-gradient(to bottom right, #f9f9f9 70%, var(--home-color-80)); */
+  /* border-image-slice: 1; */
+  /* background-color: var(--c21); */
+  border-left: 2px solid var(--c21);
+}
+section.quick-details nav li:hover {
+  border-color: var(--c11);
 }
 section.quick-details nav li.active {
-  background-color: var(--tuesday-color);
+  background-color: var(--c21);
+  border-color: #fff;
 }
 
 /***
@@ -174,14 +204,33 @@ section.quick-details dl {
 section.quick-details dt {
   color: #888;
   font-size: .9em;
-  border-left: 3px solid #666;
+  border-top: 1px solid var(--c23);
   padding: .5em;
-  box-shadow: -3px 0px 1px 0px #666;
+  /* box-shadow: -3px 0px 1px 0px #666; */
 }
 section.quick-details dd {
-  padding-bottom: .8em;
-  padding-top: .4em;
+  padding: .2em 0 .6em 0;
   margin-left: 2em;
+}
+section.quick-details div.many {
+  display: flex;
+  flex-direction: column;
+}
+section.quick-details div.many div {
+  padding-right: 2em;
+  border-top: 1px solid var(--c23);
+}
+section.quick-details div.many dl {
+  display: flex;
+  padding: 0;
+  margin: .4em;
+}
+section.quick-details div.many dt {
+  border: none;
+}
+section.quick-details div.many dd {
+  margin-left: 0;
+  padding: 0 0 .5em .5em;
 }
 
 /***
@@ -199,7 +248,7 @@ div.modal-whole {
   background-color: rgba(0,0,0,.4);
 }
 div.modal-content {
-  background-color: #f4f4f4;
+  background-color: #fff;
   margin: 3em auto;
   padding: 1.5em 3em;
   width: 50%;
@@ -214,4 +263,52 @@ div.modal-content span.close {
 div.modal-content span.close:hover {
   color: #000;
   cursor: pointer;
+}
+div.modal-content h1 {
+  font-size: 1.4em;
+}
+
+/***
+======= Buttons
+*/
+
+button.update {
+  background-color: #fff;
+  padding: .3em .6em;
+  border: 1px solid var(--c31);
+  border-radius: .7em / .5em;
+  cursor: pointer;
+}
+button.update:hover {
+  background-color: var(--c31);
+  /* color: #fff; */
+}
+
+/* Form inside modal */
+
+div.modal-content label {
+  display: block;
+  margin-bottom: .3em;
+}
+div.modal-content input {
+  width: 100%;
+  padding: .8em;
+  border: 1px solid #ddd;
+  border-radius: .3em;
+  color: #888;
+  background-color: #f9f9f9;
+}
+div.modal-content li {
+  margin-bottom: 1em;
+}
+div.modal-content button.submit {
+  color: white;
+  background-color: var(--c11);
+  border: 1px solid #ddd;
+  border-radius: .3em;
+  padding: .6em 1.5em;
+  cursor: pointer;
+}
+div.modal-content button.submit:hover {
+  background-color: var(--c12);
 }

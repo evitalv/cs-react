@@ -6,10 +6,10 @@ function QuickTabManyRecords(props) {
 
   function OneRecord(recordIndex) {
     return attributes.map((item, attrIndex) => (
-      <React.Fragment key={labels[attrIndex]}>
+      <div key={labels[attrIndex]}>
         <dt>{labels[attrIndex]}</dt>
         <dd>{props.data[recordIndex][item[0]]}</dd>
-      </React.Fragment>
+      </div>
     ));
   }
 

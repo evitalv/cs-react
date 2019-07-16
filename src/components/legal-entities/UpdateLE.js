@@ -4,20 +4,25 @@ import {Formik, Field, Form, ErrorMessage} from "formik"
 import { buildYup } from 'json-schema-to-yup'
 import {schema as json, config} from "./schema.js"
 import Modal from "../general/Modal"
+import {useCustomLegalEntityDataUpdate} from "../../hooks/custom/UpdateData"
+import {mergeFields} from "../general/utils"
 
 function UpdateLE(props) {
   const [legalEntity, setLegalEntity] = useState({});
 
-  const fields = [{name: "legalName", number: 10, label: "Legal name", required: "yes"},
-                  {name: "note", number: 5, label: "Note"}];
+  const customFields = useCustomLegalEntityDataUpdate();
+  const productFields = [
+    {name: "legalName", orderNumber: 10, label: "Legal name"},
+    {name: "note", orderNumber: 20, label: "Note"}
+  ];
+  const fields = mergeFields(productFields, customFields);
 
-  fields.sort((a, b) => a.number - b.number);
   const markup = fields.map((item) => (
-    <React.Fragment key={item.name}>
+    <li key={item.name}>
       <label htmlFor={item.name}>{item.label}</label>
       <Field type="text" name={item.name} />
       <ErrorMessage name={item.name} component="div" className="error" />
-    </React.Fragment>
+    </li>
   ));
 
   function handleSubmit(values, actions) {
@@ -25,6 +30,7 @@ function UpdateLE(props) {
       () => {
         actions.setSubmitting(false);
         props.hide();
+        props.refresh();
       },
       error => {
         actions.setSubmitting(false);
@@ -35,10 +41,10 @@ function UpdateLE(props) {
   const yupSchema = buildYup(json, config);
 
   useEffect(() => {
-    if (props.leid) {
+    if (props.leid > -1) {
       Axios.get(`http://localhost:8080/legal-entities/${props.leid}`).then(res => {
         setLegalEntity(res.data);
-        console.log("Inside update effect");
+        console.log("Inside update useEffect");
         console.log(res.data);
       });
     }
@@ -53,11 +59,10 @@ function UpdateLE(props) {
         validationSchema = {yupSchema}
         render = {(formikProps) => legalEntity ? (
           <Form>
-            {markup}
-            <button type="submit" disabled={formikProps.isSubmitting}>
+            <ul>{markup}</ul>
+            <button type="submit" disabled={formikProps.isSubmitting} class="submit">
               Submit
             </button>
-            
           </Form>
         ) : null}
       />

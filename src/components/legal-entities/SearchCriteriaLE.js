@@ -1,7 +1,8 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 function SearchCriteriaLE(props) {
-  return <p id="search">Search parameters will be here</p>;
+  return <section id="search"><h1><Link to="/">Home</Link></h1></section>;
 }
 
 export default SearchCriteriaLE;

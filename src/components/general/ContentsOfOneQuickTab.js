@@ -10,7 +10,7 @@ function ContentsOfOneQuickTab(props) {
   if (props.fixedData[props.tab].type == "one") {
     oneOrMany = <OneRecord {...props} />;
   } else {
-    oneOrMany = <ManyRecords {...props} />;
+    oneOrMany = <div class="many"><ManyRecords {...props} /></div>;
   }
   return oneOrMany;
 }

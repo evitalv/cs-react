@@ -7,7 +7,7 @@ function Home() {
       <section id="home-main">
         <h1>Card Suite Home</h1>
         <div>
-          <Link to="/legal-entities">Legal entities and something else</Link>
+          <Link to="/legal-entities">Legal entities</Link>
           <Link to="/cases">Cases</Link>
           <Link to="/cases">Something</Link>
           <Link to="/cases">Something</Link>
