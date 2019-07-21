@@ -2,28 +2,31 @@ import React, {useState, useEffect} from "react"
 import Axios from "axios"
 import {Formik, Field, Form, ErrorMessage} from "formik"
 import { buildYup } from 'json-schema-to-yup'
-import {schema as json, config} from "./schema.js"
+import {schema, config} from "./schema.js"
 import Modal from "../general/Modal"
 import {useCustomLegalEntityDataUpdate} from "../../hooks/custom/UpdateData"
-import {mergeFields} from "../general/utils"
+import {mergeFields, mergeValidationSchemas} from "../general/utils"
+import {cSchema, cConfig} from "../../custom/schemas/cSchemaLegalEntity"
 
 function UpdateLE(props) {
   const [legalEntity, setLegalEntity] = useState({});
 
   const customFields = useCustomLegalEntityDataUpdate();
   const productFields = [
-    {name: "legalName", orderNumber: 10, label: "Legal name"},
-    {name: "note", orderNumber: 20, label: "Note"}
+    {name: "legalName", number: 10, label: "Legal name"},
+    {name: "note", number: 20, label: "Note"}
   ];
   const fields = mergeFields(productFields, customFields);
 
-  const markup = fields.map((item) => (
-    <li key={item.name}>
-      <label htmlFor={item.name}>{item.label}</label>
-      <Field type="text" name={item.name} />
-      <ErrorMessage name={item.name} component="div" className="error" />
-    </li>
-  ));
+  function getMarkup(values) {
+    return fields.map((item) => (
+      <li key={item.name}>
+        <label htmlFor={item.name}>{item.label}</label>
+        <Field type="text" name={item.name} value={values[item.name] || ''} />
+        <ErrorMessage name={item.name} component="div" className="error" />
+      </li>
+    ))
+  }
 
   function handleSubmit(values, actions) {
     Axios.put(`http://localhost:8080/legal-entities-update/${props.leid}`, values).then(
@@ -38,7 +41,8 @@ function UpdateLE(props) {
     );
   }
 
-  const yupSchema = buildYup(json, config);
+  const [json, jsonConfig] = mergeValidationSchemas(schema, cSchema, config, cConfig);
+  const yupSchema = buildYup(json, jsonConfig);
 
   useEffect(() => {
     if (props.leid > -1) {
@@ -57,10 +61,10 @@ function UpdateLE(props) {
         onSubmit = {handleSubmit}
         enableReinitialize = "true"
         validationSchema = {yupSchema}
-        render = {(formikProps) => legalEntity ? (
+        render = {(fProps) => legalEntity ? (
           <Form>
-            <ul>{markup}</ul>
-            <button type="submit" disabled={formikProps.isSubmitting} class="submit">
+            <ul>{getMarkup(fProps.values)}</ul>
+            <button type="submit" disabled={fProps.isSubmitting} class="submit">
               Submit
             </button>
           </Form>

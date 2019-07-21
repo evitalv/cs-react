@@ -6,6 +6,7 @@ import {useCustomLegalEntityDataQuick} from "../../hooks/custom/QuickViewData";
 
 function LegalEntityQuickDetails(props) {
   let [generalLabels, generalAttributes, acceptorLabels, acceptorAttr] = useCustomLegalEntityDataQuick();
+  const [leName, setLeName] = useState("");
   if (!generalLabels.length) {
     generalLabels = [
       "Internal ID",
@@ -75,14 +76,14 @@ function LegalEntityQuickDetails(props) {
     if (props.leid) {
       Axios.get(`http://localhost:8080/legal-entities/${props.leid}`).then(res => {
         // setTabData(res.data);
-        console.log("Inside le qd useeffect");
+        setLeName(res.data[props.nameField]);
         dispatch({activeTab: 0, tabData: res.data});
       });
     }
   }, [props.leid]);
 
   return props.leid ? (
-    <QuickDetails name={state.tabData[props.nameField]} data={allFixedData} callback={loadData} activeTab={state.activeTab}>
+    <QuickDetails name={leName} data={allFixedData} callback={loadData} activeTab={state.activeTab}>
       <ContentsOfOneQuickTab data={state.tabData} tab={state.activeTab} fixedData={allFixedData}/>
     </QuickDetails>
   ) : null;
