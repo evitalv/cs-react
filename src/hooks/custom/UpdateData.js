@@ -1,5 +1,3 @@
-import React from "react";
-
 function useCustomLegalEntityDataUpdate() {
   const fields = [
     {name: "legalName", number: 10, label: "Custom legal name"},

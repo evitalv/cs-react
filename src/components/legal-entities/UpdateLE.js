@@ -18,15 +18,13 @@ function UpdateLE(props) {
   ];
   const fields = mergeFields(productFields, customFields);
 
-  function getMarkup(values) {
-    return fields.map((item) => (
-      <li key={item.name}>
-        <label htmlFor={item.name}>{item.label}</label>
-        <Field type="text" name={item.name} value={values[item.name] || ''} />
-        <ErrorMessage name={item.name} component="div" className="error" />
-      </li>
-    ))
-  }
+  const markup = fields.map((item) => (
+    <li key={item.name}>
+      <label htmlFor={item.name}>{item.label}</label>
+      <Field type="text" name={item.name} />
+      <ErrorMessage name={item.name} component="div" className="error" />
+    </li>
+  ));
 
   function handleSubmit(values, actions) {
     Axios.put(`http://localhost:8080/legal-entities-update/${props.leid}`, values).then(
@@ -48,14 +46,16 @@ function UpdateLE(props) {
     if (props.leid > -1) {
       Axios.get(`http://localhost:8080/legal-entities/${props.leid}`).then(res => {
         setLegalEntity(res.data);
-        console.log("Inside update useEffect");
-        console.log(res.data);
       });
     }
   }, [props.leid]);
 
+  function clearFields() {
+    setLegalEntity({});
+  }
+
   return (
-    <Modal isShowing={props.isShowing} title={`Update ${legalEntity[props.nameField]}`} hide={props.hide}>
+    <Modal isShowing={props.isShowing} title={`Update ${legalEntity[props.nameField]}`} hide={props.hide} clear={clearFields}>
       <Formik
         initialValues = {legalEntity}
         onSubmit = {handleSubmit}
@@ -63,7 +63,7 @@ function UpdateLE(props) {
         validationSchema = {yupSchema}
         render = {(fProps) => legalEntity ? (
           <Form>
-            <ul>{getMarkup(fProps.values)}</ul>
+            <ul>{markup}</ul>
             <button type="submit" disabled={fProps.isSubmitting} class="submit">
               Submit
             </button>
